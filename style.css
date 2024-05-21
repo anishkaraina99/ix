@@ -1,4 +1,4 @@
-body {
+/* body {
   font-family: Arial, sans-serif;
   margin: 20px;
   background-color: #f0f0f0;
@@ -32,4 +32,144 @@ a {
 
 a:hover {
   text-decoration: underline;
+} */
+
+
+
+/* 
+body {
+  font-family: Arial, sans-serif;
+}
+
+header.jumbotron {
+  background-color: #f8f9fa;
+  padding: 2rem 1rem;
+  margin-bottom: 2rem;
+}
+
+header.jumbotron img {
+  margin-bottom: 1rem;
+  width: auto; /* This ensures the image retains its aspect ratio */
+  height: auto; /* This ensures the image retains its aspect ratio */
+  max-width: 200px; /* This limits the image's width 
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+} */
+
+/* h2 {
+  border-bottom: 2px solid #e9ecef;
+  padding-bottom: 0.5rem;
+}
+
+footer {
+  background-color: #f8f9fa;
+  margin-top: 2rem;
+}
+
+h5 {
+  color: #0056b3;
+}
+
+ul {
+  padding-left: 1rem;
+}
+
+.navbar-brand {
+  font-weight: bold;
+} */
+
+
+
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Raleway:wght@400;700&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f4f8;
+    color: #333;
+}
+
+header.jumbotron {
+    background-color: #4b6cb7; /* Blue color */
+    color: white;
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+}
+
+header.jumbotron img {
+    margin-bottom: 1rem;
+    width: auto; /* This ensures the image retains its aspect ratio */
+    height: auto; /* This ensures the image retains its aspect ratio */
+    max-width: 200px; /* This limits the image's width */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: 3px solid white; /* Adds a white border to the image */
+}
+
+h2, h5 {
+    color: #4b6cb7; /* Blue color */
+    font-family: 'Raleway', sans-serif;
+}
+
+h2 {
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 0.5rem;
+}
+
+h5 {
+    margin-top: 1.5rem;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: #4b6cb7; /* Blue color */
+}
+
+.navbar-light .navbar-nav .nav-link.active {
+    color: #7b4397; /* Purple color */
+}
+
+.card {
+    border: none;
+    border-left: 5px solid #4b6cb7; /* Blue border */
+    margin-bottom: 1.5rem;
+}
+
+footer {
+    background-color: #4b6cb7; /* Blue color */
+    color: white;
+    margin-top: 2rem;
+    padding: 1rem 0;
+}
+
+.list-unstyled li {
+    margin-bottom: 0.5rem;
+}
+
+a {
+    color: #4b6cb7; /* Blue color */
+}
+
+a:hover {
+    color: #7b4397; /* Purple color */
+}
+
+.text-center h2 {
+    margin-top: 1rem;
+}
+
+.text-center p.lead {
+    margin-top: 0.5rem;
+}
+
+ul {
+    padding-left: 1rem;
+}
+
+ul li::before {
+    content: "• ";
+    color: #7b4397; /* Purple color */
 }
