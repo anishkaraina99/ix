@@ -35,16 +35,7 @@ const router = createBrowserRouter(routes);
 
 
 function App() {
-  return (
-    <div className="App">
-      <BlogsPage />
-      {/* <Navbar /> */}
-    </div>
-  );
+  return <RouterProvider router={router} />;
 }
-
-// function App() {
-//   return <RouterProvider router={router} />;
-// }
 
 export default App;
