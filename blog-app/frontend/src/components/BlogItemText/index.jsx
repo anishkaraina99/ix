@@ -5,6 +5,11 @@ import Categories from "../Categories";
 import "./index.css";
 
 export default function BlogItemText({ blogPost, headerFontSize }) {
+
+  if (!blogPost || !blogPost.author || !blogPost.createdAt) {
+    return <div>Loading...</div>; // Or any other fallback UI
+  }
+
   return (
     <div>
       <div style={{ display: "flex" }}>
@@ -26,13 +31,13 @@ export default function BlogItemText({ blogPost, headerFontSize }) {
         {blogPost.title}
       </p>
       <p style={{ fontSize: "16px", color: "#667085", textAlign: "left" }}>
-        {blogPost.description.substring(0, 100)}...
+        {blogPost.description?.substring(0, 100)}...
       </p>
       <Categories blogPost={blogPost?.categories} />
     </div>
   );
 }
 BlogItemText.propTypes = {
-  blogPost: PropTypes.array.isRequired,
+  blogPost: PropTypes.object.isRequired,
   headerFontSize: PropTypes.string.isRequired,
 };

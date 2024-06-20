@@ -1,15 +1,23 @@
 import React, { useEffect, useMemo, useState } from "react";
-
+import PropTypes from "prop-types";
 import { Modal } from "bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 
 import Categories from "../Categories";
 
-export default function AddEditBlogModal({
-  addBlog,
-  editBlog,
-  categories,
-  createBlogPost,
-}) {
+import {
+  createBlog,
+  updateBlog,
+  setAddBlog,
+  setEditBlog,
+} from "../../features/blogsSlice";
+
+export default function AddEditBlogModal() {
+  const dispatch = useDispatch();
+
+  const { addBlog, editBlog } = useSelector((state) => state.blogs);
+  const { categories } = useSelector((state) => state.categories);
+
   const [blog, setBlog] = useState();
 
   const modalEl = document.getElementById("addEditModal");
@@ -21,9 +29,51 @@ export default function AddEditBlogModal({
   useEffect(() => {
     if (addBlog) {
       setBlog(addBlog);
-      addEditModal.show();
+      addEditModal?.show();
+    } else if (editBlog) {
+      setBlog(editBlog);
+      addEditModal?.show();
     }
-  }, [addBlog]);
+  }, [addBlog, editBlog, addEditModal]);
+
+  const onSubmit = (e) => {
+    e?.preventDefault();
+    if (isFormValid()) {
+      if (addBlog) {
+        dispatch(createBlog(blog));
+      } else if (editBlog) {
+        dispatch(updateBlog(blog));
+      }
+      resetBlog();
+      addEditModal?.hide();
+    }
+  };
+
+  const resetBlog = () => {
+    setBlog({
+      title: "",
+      description: "",
+      categories: [],
+      content: [],
+      authorId: "",
+    });
+  };
+
+  const isFormValid = () => {
+    const form = document.getElementById("blogForm");
+    form?.classList?.add("was-validated");
+    return form?.checkValidity();
+  };
+
+  const onCloseModal = () => {
+    resetBlog();
+    addEditModal?.hide();
+    if (editBlog) {
+      dispatch(setEditBlog(null));
+    } else if (addBlog) {
+      dispatch(setAddBlog(null));
+    }
+  };
 
   if (!categories && !categories?.length) {
     return null;
@@ -38,7 +88,7 @@ export default function AddEditBlogModal({
         aria-labelledby="addEditModalLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog">
+        <div className="modal-dialog modal-xl">
           <div className="modal-content">
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="addEditModalLabel">
@@ -47,8 +97,8 @@ export default function AddEditBlogModal({
               <button
                 type="button"
                 className="btn-close"
-                data-bs-dismiss="modal"
                 aria-label="Close"
+                onClick={onCloseModal}
               ></button>
             </div>
             <div className="modal-body">
@@ -255,22 +305,14 @@ export default function AddEditBlogModal({
               <button
                 type="button"
                 className="btn btn-secondary"
-                data-bs-dismiss="modal"
+                onClick={onCloseModal}
               >
                 Close
               </button>
               <button
                 type="button"
                 className="btn btn-primary"
-                onClick={() => {
-                  const newBlog = blog;
-                  newBlog.categoryIds = blog.categories.map((x) => x.id);
-                  delete blog.categories;
-                  newBlog.authorId = blog.author.id;
-                  delete blog.author;
-                  createBlogPost(blog);
-                  addEditModal.hide();
-                }}
+                onClick={onSubmit}
               >
                 Save changes
               </button>
@@ -281,3 +323,7 @@ export default function AddEditBlogModal({
     </div>
   );
 }
+
+AddEditBlogModal.prototype = {
+  onClose: PropTypes.func,
+};
